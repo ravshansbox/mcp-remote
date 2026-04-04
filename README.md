@@ -394,7 +394,58 @@ You can run `rm -rf ~/.mcp-auth` to clear any locally stored state and tokens.
 Run the following on the command line (not from an MCP server):
 
 ```shell
-npx -p mcp-remote@latest mcp-remote-client https://remote.mcp.server/sse
+npx -y -p "@ravshansbox/mcp-remote@latest" mcp-remote-client https://remote.mcp.server/sse
 ```
 
 This will run through the entire authorization flow and attempt to list the tools & resources at the remote URL. Try this after running `rm -rf ~/.mcp-auth` to see if stale credentials are your problem, otherwise hopefully the issue will be more obvious in these logs than those in your MCP client.
+
+## Configuration Examples
+
+### OpenCode
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "atlassian": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "-p",
+        "@ravshansbox/mcp-remote@latest",
+        "mcp-remote",
+        "https://mcp.atlassian.com/v1/mcp"
+      ]
+    },
+    "figma": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "-p",
+        "@ravshansbox/mcp-remote@latest",
+        "mcp-remote",
+        "https://mcp.figma.com/mcp",
+        "9696",
+        "--callback-path",
+        "/callback",
+        "--static-oauth-client-metadata",
+        "{\"client_name\":\"Codex\",\"redirect_uris\":[\"http://localhost:9696/callback\"]}"
+      ]
+    }
+  }
+}
+```
+
+### Command Line
+
+**Atlassian:**
+```bash
+npx -y -p @ravshansbox/mcp-remote@latest mcp-remote https://mcp.atlassian.com/v1/mcp
+```
+
+**Figma:**
+```bash
+npx -y -p @ravshansbox/mcp-remote@latest mcp-remote https://mcp.figma.com/mcp 9696 --callback-path /callback --static-oauth-client-metadata '{"client_name":"Codex","redirect_uris":["http://localhost:9696/callback"]}'
+```
