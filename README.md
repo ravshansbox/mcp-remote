@@ -401,7 +401,82 @@ This will run through the entire authorization flow and attempt to list the tool
 
 ## Configuration Examples
 
-### OpenCode
+### pi
+
+```json
+{
+  "mcpServers": {
+    "atlassian": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "-p",
+        "@ravshansbox/mcp-remote@latest",
+        "mcp-remote",
+        "https://mcp.atlassian.com/v1/mcp"
+      ],
+      "directTools": true
+    },
+    "figma": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "-p",
+        "@ravshansbox/mcp-remote@latest",
+        "mcp-remote",
+        "https://mcp.figma.com/mcp",
+        "9696",
+        "--callback-path",
+        "/callback",
+        "--static-oauth-client-metadata",
+        "{\"client_name\":\"Codex\",\"redirect_uris\":[\"http://localhost:9696/callback\"]}"
+      ],
+      "directTools": true
+    }
+  }
+}
+```
+
+### oh-my-pi
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+  "mcpServers": {
+    "atlassian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "-p",
+        "@ravshansbox/mcp-remote@latest",
+        "mcp-remote",
+        "https://mcp.atlassian.com/v1/mcp"
+      ]
+    },
+    "figma": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "-p",
+        "@ravshansbox/mcp-remote@latest",
+        "mcp-remote",
+        "https://mcp.figma.com/mcp",
+        "9696",
+        "--callback-path",
+        "/callback",
+        "--static-oauth-client-metadata",
+        "{\"client_name\":\"Codex\",\"redirect_uris\":[\"http://localhost:9696/callback\"]}"
+      ]
+    }
+  }
+}
+```
+
+### opencode
 
 ```json
 {
